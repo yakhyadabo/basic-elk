@@ -1,0 +1,4 @@
+== Simple ELK
+
+A simple ELK stacks with the minimum infrastructure
+

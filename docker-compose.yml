@@ -1,0 +1,42 @@
+version: "2"
+services:
+
+  elasticsearch:
+    image: elasticsearch:5.0
+    volumes: 
+      - elasticsearchData:/usr/share/elasticsearch/data
+#    volumes_from:
+#      - elasticsearchData
+    ports:
+      - "9200:9200"
+  
+  logstash:
+    image: logstash:5.0
+  #  environment:
+      #    TZ: Europe/Paris
+    ports:
+      - "25826:25826"
+      - "25826:25826/udp"
+    volumes:
+      - ./conf:/conf
+    links:
+      - elasticsearch:db
+    command: logstash -f /conf/syslog.conf
+  
+  kibana:
+    image: kibana:5.0
+    links:
+      - elasticsearch:elasticsearch
+    environment:
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+  
+      #  elasticsearchData:
+      #    image: elasticsearch
+      #    command: "true"
+      #  #  volumes:
+      #  #    - ./var/data/logs:/usr/share/elasticsearch/data
+volumes:
+  elasticsearchData:
+    driver: local
