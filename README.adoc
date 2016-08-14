@@ -1,4 +1,15 @@
 == Simple ELK
 
-A simple ELK stacks with the minimum infrastructure
+A simple ELK stacks with the minimum infrastructure (whitout a Reddis broker).
+
+=== The docker-compose file
+
+=== Configure rsyslog
+
+=== The syslog.conf file
+
+=== Setup 
+
+
+Just run make to setup the whole infrastructure
 
