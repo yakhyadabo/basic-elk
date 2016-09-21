@@ -5,14 +5,14 @@ services:
     image: elasticsearch:5.0
     volumes: 
       - elasticsearchData:/usr/share/elasticsearch/data
-    ports:
-      - "9200:9200"
+    expose:
+      - 9200
   
   logstash:
     image: logstash:5.0
-    ports:
-      - "25826:25826"
-      - "25826:25826/udp"
+    expose:
+      - 25826
+      - 25826/udp
     volumes:
       - ./conf:/conf
     links:
@@ -26,7 +26,7 @@ services:
     environment:
       - ELASTICSEARCH_URL=http://elasticsearch:9200
     ports:
-      - "5601:5601"
+      - 5601
   
 volumes:
   elasticsearchData:
